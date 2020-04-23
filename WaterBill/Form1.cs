@@ -12,6 +12,7 @@ namespace WaterBill
 {
   public partial class Form1 : Form
   {
+    BillAnalysis billAnalysis = new BillAnalysis();
     public Form1()
     {
       InitializeComponent();
@@ -27,10 +28,15 @@ namespace WaterBill
 
       if(firstNumeric && secondNumeric && thirdNumeric && fourthNumeric)
       {
-        // this is all very self explanitory I'm not sure what you want me to say here.
-        double[] quarters = { firstQuart, secondQuart, thirdQuart, fourthQuart };
-        txtTotal.Text = quarters.Sum().ToString();
-        txtAverage.Text = quarters.Average().ToString();
+        Bill firstQuarterBill = new Bill("First Quarter", firstQuart);
+        Bill secondQuarterBill = new Bill("Second Quarter", secondQuart);
+        Bill thirdQuarterBill = new Bill("Third Quarter", thirdQuart);
+        Bill fourthQuarterBill = new Bill("Fourth Quarter", fourthQuart);
+
+        // Puts data into array and analyses it.
+        Bill[] quarters = { firstQuarterBill, secondQuarterBill, thirdQuarterBill, fourthQuarterBill };
+        txtTotal.Text = billAnalysis.calculateSum(quarters).ToString();
+        txtAverage.Text = billAnalysis.calculateAverage(quarters).ToString();
       }
       else
       {
